@@ -1,6 +1,6 @@
-import tensorflow as tf
-from tensorflow import keras
-import tensorflow.keras.backend as K
+import keras_core as keras
+import keras_core.backend as K
+from keras_core import ops
 
 
 class FocalModulation(keras.layers.Layer):
@@ -42,7 +42,6 @@ class FocalModulation(keras.layers.Layer):
         if self.use_postln_in_modulation:
             self.ln = keras.layers.LayerNormalization(name=f'{prefix}.norm')
             self.map['norm'] = self.ln
-        # print(len(self.map.keys()))
     
     def call(self, x):
         """
@@ -51,13 +50,13 @@ class FocalModulation(keras.layers.Layer):
         """
         C = x.shape[-1]
         x = self.f(x)
-        q, ctx, self.gates = tf.split(x, (C, C, self.focal_level+1), -1)
+        q, ctx, self.gates = ops.split(x, [C, 2 * C], -1) # from numpy docs
         ctx_all = 0 
         for l in range(self.focal_level):  
             ctx = self.focal_layers[l](ctx)
-            ctx_all = ctx_all + tf.math.multiply(ctx, self.gates[:,: , :, l:l+1])
-        ctx = tf.math.reduce_mean(ctx, 1, keepdims=True)
-        ctx = tf.math.reduce_mean(ctx, 2, keepdims=True)
+            ctx_all = ctx_all + ops.multiply(ctx, self.gates[:,: , :, l:l+1])
+        ctx = ops.mean(ctx, 1, keepdims=True)
+        ctx = ops.mean(ctx, 2, keepdims=True)
         ctx_global = self.act(ctx)
         ctx_all = ctx_all + ctx_global*self.gates[:,: , :, self.focal_level:]
         if self.normalize_modulator:
