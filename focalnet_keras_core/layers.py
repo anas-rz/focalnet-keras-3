@@ -1,6 +1,8 @@
 import keras_core as keras
 import keras_core.backend as K
 from keras_core import ops
+from keras_core import initializers
+
 
 
 class FocalModulation(keras.layers.Layer):
@@ -74,14 +76,8 @@ class FocalModulation(keras.layers.Layer):
 
 class LayerScale(keras.layers.Layer):
     """Layer scale module.
-    References:
-      - https://arxiv.org/abs/2103.17239
-    Args:
-      init_values (float): Initial value for layer scale. Should be within
-        [0, 1].
-      projection_dim (int): Projection dimensionality.
-    Returns:
-      Tensor multiplied to the scale.
+
+    # https://github.com/keras-team/keras-core/blob/bb217106d4d7119b43cf94ab1741c89510b86f8f/keras_core/applications/convnext.py#L179
     """
 
     def __init__(self, init_values, projection_dim, **kwargs):
@@ -89,14 +85,25 @@ class LayerScale(keras.layers.Layer):
         self.init_values = init_values
         self.projection_dim = projection_dim
 
-    def build(self, input_shape):
-        self.gamma = tf.Variable(
-            self.init_values * tf.ones((self.projection_dim,))
+    def build(self, _):
+        self.gamma = self.add_weight(
+            shape=(self.projection_dim,),
+            initializer=initializers.Constant(self.init_values),
+            trainable=True,
         )
 
     def call(self, x):
         return x * self.gamma
 
+    def get_config(self):
+        config = super().get_config()
+        config.update(
+            {
+                "init_values": self.init_values,
+                "projection_dim": self.projection_dim,
+            }
+        )
+        return config
     def get_config(self):
         config = super().get_config()
         config.update(
