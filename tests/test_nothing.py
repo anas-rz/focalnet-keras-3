@@ -1,5 +1,5 @@
-import {{REPO_NAME_SNAKECASE}}
+import focalnet_keras_core
 
 
 def test_nothing():
-    print({{REPO_NAME_SNAKECASE}})
+    print(focalnet_keras_core)

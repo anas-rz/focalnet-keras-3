@@ -1,4 +1,4 @@
-# {{REPO_NAME}}
+# focalnet-keras-core
 
 A simple template for Python projects, with CI/CD configured through GitHub Actions.  Compatible with any virtual environment manager (e.g. `venv`, `pyenv`, `poetry`, `conda`).
 
@@ -11,7 +11,7 @@ A simple template for Python projects, with CI/CD configured through GitHub Acti
     ./templatize
     ```
 
-    This updates placeholders like `{{REPO_NAME}}`, so everything is configured with your username, repo name, email, etc.
+    This updates placeholders like `focalnet-keras-core`, so everything is configured with your username, repo name, email, etc.
 3. Commit and push the changes.
     ```bash
     git add .
@@ -23,10 +23,10 @@ A simple template for Python projects, with CI/CD configured through GitHub Acti
 ## Install
 
 ```bash
-pip install "{{REPO_NAME}} @ git+ssh://git@github.com/{{REPO_OWNER}}/{{REPO_NAME}}.git"
+pip install "focalnet-keras-core @ git+ssh://git@github.com/anas-rz/focalnet-keras-core.git"
 
 # Install all dev dependencies (tests etc.)
-pip install "{{REPO_NAME}}[test] @ git+ssh://git@github.com/{{REPO_OWNER}}/{{REPO_NAME}}.git"
+pip install "focalnet-keras-core[test] @ git+ssh://git@github.com/anas-rz/focalnet-keras-core.git"
 
 # Setup pre-commit hooks
 pre-commit install

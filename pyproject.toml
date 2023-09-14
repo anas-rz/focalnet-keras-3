@@ -2,11 +2,11 @@
 requires = ["setuptools", "setuptools-scm"]
 
 [project]
-name = "{{REPO_NAME}}"
+name = "focalnet-keras-core"
 authors = [
-    {name = "{{GIT_USER_NAME}}", email = "{{GIT_USER_EMAIL}}"},
+    {name = "Muhammad Anas Raza", email = "memanasraza@gmail.com"},
 ]
-description = "{{REPO_NAME}}"
+description = "focalnet-keras-core"
 license = {text = "MIT"}
 dynamic = ["version", "readme"]  # NOTE: Must be in sync with [tool.setuptools.dynamic] below
 dependencies = []
@@ -15,7 +15,7 @@ classifiers = ["Programming Language :: Python :: 3"]
 
 [tool.setuptools.dynamic]
 # NOTE: Must be in sync with 'project.dynamic' above
-version = {attr = "{{REPO_NAME_SNAKECASE}}.VERSION"}
+version = {attr = "focalnet_keras_core.VERSION"}
 readme = {file = ["README.md"], content-type = "text/markdown"}
 
 [tool.setuptools.packages.find]
@@ -39,7 +39,7 @@ test = [
 line-length = 88
 
 [tool.mypy]
-files = "{{REPO_NAME_SNAKECASE}}/"
+files = "focalnet_keras_core/"
 check_untyped_defs = "true"
 ignore_missing_imports = "true"
 
