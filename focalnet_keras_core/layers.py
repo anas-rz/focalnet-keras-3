@@ -113,4 +113,21 @@ class LayerScale(keras.layers.Layer):
             }
         )
         return config
+    
+class StochasticDepth(keras.layers.Layer):
+    """
+    https://keras.io/examples/vision/cct/
+    """
+    def __init__(self, drop_prop, **kwargs):
+        super(StochasticDepth, self).__init__(**kwargs)
+        self.drop_prob = drop_prop
+
+    def call(self, x, training=None):
+        if training:
+            keep_prob = 1 - self.drop_prob
+            shape = (tf.shape(x)[0],) + (1,) * (tf.shape(x).shape[0] - 1)
+            random_tensor = keep_prob + tf.random.uniform(shape, 0, 1)
+            random_tensor = tf.floor(random_tensor)
+            return (x / keep_prob) * random_tensor
+        return x
 
