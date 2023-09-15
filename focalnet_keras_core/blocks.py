@@ -1,5 +1,5 @@
 import keras_core as keras
-import keras.backend as K
+import keras_core.backend as K
 from focalnet_keras_core.layers import *
 
 def Mlp(hidden_features=None, dropout_rate=0., act_layer=keras.activations.gelu, out_features=None, prefix=None):
@@ -85,7 +85,7 @@ def FocalNetBlock(dim, mlp_ratio=4., drop=0., drop_path=0.,
             x = keras.layers.Add()([x_alt, x])
         else:
             x_alt = norm_layer(name=f"{name}.norm2")(x)
-            x_alt = Mlp(hidden_features=dim * mlp_ratio, dropout_rate=drop, prefix=name)(x_alt)
+            x_alt = Mlp(hidden_features=int(dim * mlp_ratio), dropout_rate=drop, prefix=name)(x_alt)
             x_alt = StochasticDepth(drop_path)(x_alt)
             x = keras.layers.Add()([x_alt, x])
         x = keras.layers.Reshape((H * W, C))(x)
