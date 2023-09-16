@@ -16,7 +16,7 @@ import pytest
 @pytest.mark.parametrize("use_postln_in_modulation", [True, False])
 @pytest.mark.parametrize("normalize_modulator", [True, False])
 @pytest.mark.parametrize("proj_drop", [0.1, 0.5])
-def test_multi_expert_layer(
+def test_focal_modulation_layer(
     batch_size,
     in_height,
     in_width,
