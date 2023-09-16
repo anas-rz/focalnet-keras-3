@@ -127,17 +127,6 @@ class LayerScale(keras.layers.Layer):
         )
         return config
 
-    def get_config(self):
-        config = super().get_config()
-        config.update(
-            {
-                "init_values": self.init_values,
-                "projection_dim": self.projection_dim,
-            }
-        )
-        return config
-
-
 class StochasticDepth(keras.layers.Layer):
     def __init__(self, drop_prop, **kwargs):
         super().__init__(**kwargs)
@@ -147,7 +136,7 @@ class StochasticDepth(keras.layers.Layer):
         if training:
             keep_prob = 1 - self.drop_prob
             shape = (ops.shape(x)[0],) + (1,) * (len(x.shape) - 1)
-            random_tensor = keep_prob + keras.random.random.uniform(shape, 0, 1)
+            random_tensor = keep_prob + keras.random.uniform(shape, 0, 1)
             random_tensor = ops.floor(random_tensor)
             return (x / keep_prob) * random_tensor
         return x
