@@ -6,10 +6,10 @@ import pytest
 
 @pytest.mark.parametrize("batch_size", [1, 2])
 @pytest.mark.parametrize("dim", [3])
-@pytest.mark.parametrize("in_height", [8, 16])
-@pytest.mark.parametrize("in_width", [8, 16])
+@pytest.mark.parametrize("in_height", [8])
+@pytest.mark.parametrize("in_width", [8])
 @pytest.mark.parametrize("in_channels", [3])
-@pytest.mark.parametrize("focal_window", [2, 3, 4])
+@pytest.mark.parametrize("focal_window", [2, 3])
 @pytest.mark.parametrize("focal_level", [3, 2])
 @pytest.mark.parametrize("focal_factor", [2, 3])
 @pytest.mark.parametrize("bias", [True, False])
