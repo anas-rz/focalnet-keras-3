@@ -51,13 +51,9 @@ def test_multi_expert_layer(
     assert y.shape[1] == x.shape[1]
     assert y.shape[2] == x.shape[2]
     assert y.shape[3] == x.shape[3]
-    if y.ndim == 4:
-        assert y.shape[2] == x.shape[2]
     if backend.backend() == "torch":
         assert y.requires_grad
 
         # Check that gradients are propagated
         y.sum().backward()
-        # assert x.grad is not None
-        # assert x.grad.shape == x.shape
-        # assert x.grad.requires_grad is False
+
