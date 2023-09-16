@@ -128,14 +128,31 @@ class LayerScale(keras.layers.Layer):
         return config
 
 class StochasticDepth(keras.layers.Layer):
-    def __init__(self, drop_prop, **kwargs):
+    """Stochastic Depth module.
+
+    It performs batch-wise dropping rather than sample-wise. In libraries like
+    `timm`, it's similar to `DropPath` layers that drops residual paths
+    sample-wise.
+
+    References:
+    - https://github.com/rwightman/pytorch-image-models
+
+    Args:
+      drop_path_rate (float): Probability of dropping paths. Should be within
+        [0, 1].
+
+    Returns:
+      Tensor either with the residual path dropped or kept.
+    """
+
+    def __init__(self, drop_path_rate, **kwargs):
         super().__init__(**kwargs)
-        self.drop_prob = drop_prop
+        self.drop_path_rate = drop_path_rate
 
     def call(self, x, training=None):
         if training:
-            keep_prob = 1 - self.drop_prob
-            shape = (ops.shape(x)[0],) + (1,) * (len(x.shape) - 1)
+            keep_prob = 1 - self.drop_path_rate
+            shape = (ops.shape(x)[0],) + (1,) * (len(ops.shape(x)) - 1)
             random_tensor = keep_prob + keras.random.uniform(shape, 0, 1)
             random_tensor = ops.floor(random_tensor)
             return (x / keep_prob) * random_tensor
