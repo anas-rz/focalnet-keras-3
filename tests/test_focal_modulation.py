@@ -29,10 +29,9 @@ def test_multi_expert_layer(
     proj_drop,
     use_postln_in_modulation,
     normalize_modulator,
-    
 ):
     layer = FocalModulation(
-             dim,
+        dim,
         focal_window,
         focal_level,
         focal_factor=focal_factor,
@@ -43,7 +42,7 @@ def test_multi_expert_layer(
     )
 
     test_shapes = (batch_size, in_height, in_width, in_channels)
-    
+
     x = keras.random.normal(test_shapes)
 
     # Check that forward pass works
