@@ -1,49 +1,53 @@
-# focalnet-keras-core
+# A TensorFlow translation of FocalNet
 
-A simple template for Python projects, with CI/CD configured through GitHub Actions.  Compatible with any virtual environment manager (e.g. `venv`, `pyenv`, `poetry`, `conda`).
+Released by Microsoft in 2022, FocalNet or Focal Modulation Network is an attention-free architecture achieving superior performance than SoTA self-attention (SA) methods across various vision benchmarks.  [GitHub](https://github.com/microsoft/FocalNet/) [Paper](https://arxiv.org/abs/2203.11926).
 
+# Installation
 
-## Usage
-
-1. Create a new repository, using this one as a template.
-2. Run the `templatize` script:
-    ```bash
-    ./templatize
-    ```
-
-    This updates placeholders like `focalnet-keras-core`, so everything is configured with your username, repo name, email, etc.
-3. Commit and push the changes.
-    ```bash
-    git add .
-    git commit -m "Templatize"
-    git push
-    ```
-4. (Probably) delete this section of the README.
-
-## Install
-
-```bash
-pip install "focalnet-keras-core @ git+ssh://git@github.com/anas-rz/focalnet-keras-core.git"
-
-# Install all dev dependencies (tests etc.)
-pip install "focalnet-keras-core[test] @ git+ssh://git@github.com/anas-rz/focalnet-keras-core.git"
-
-# Setup pre-commit hooks
-pre-commit install
+```
+git clone https://github.com/anas-rz/focalnet-keras-core.git
+cd focalnet-keras-core
 ```
 
+# Usage
 
-## Tooling
+```
+from focalnet_keras_core import *
+model = focalnet_huge_fl3()
 
-| Tool | Description | Runs on |
-| --- | --- | --- |
-| [black](https://github.com/psf/black) | Code formatter | - `git commit` (through `pre-commit`) <br> - `git push` <br> - pull requests |
-| [ruff](https://github.com/astral-sh/ruff) | Code linter | - `git commit` (through `pre-commit`) <br> - `git push` <br> - pull requests |
-| [pytest](https://github.com/pytest-dev/pytest) | Unit testing framework | - `git push` <br> - pull requests |
-| [mypy](https://github.com/python/mypy) | Static type checker | - `git push` <br> - pull requests |
-| [pre-commit](https://github.com/pre-commit/pre-commit) | Pre-commit hooks | - `git commit` |
-| [twine](https://github.com/pypa/twine) $\dagger$ | PyPI package uploader | - New release (`git tag`) |
+```
 
-> $\dagger$ Requires enabling the `publish.yaml` workflow.  To activate, move the file from `.github/disabled-workflows/publish.yaml.disabled` to `.github/workflows/publish.yaml`, and set a valid PyPI token as `PYPI_API_TOKEN` in the repo secrets.
->
-> Then tag a new release of this repo, and GHA will automatically build and publish a Python wheel (`.whl`) to PyPI.
+# Available Functions:
+
+
+```
+focalnet_tiny_srf
+
+focalnet_small_srf
+
+focalnet_base_srf
+
+focalnet_tiny_lrf
+
+focalnet_small_lrf
+
+focalnet_base_lrf
+
+focalnet_tiny_iso_16
+
+focalnet_small_iso_16
+
+focalnet_base_iso_16
+
+focalnet_large_fl3
+
+focalnet_large_fl4
+
+focalnet_xlarge_fl3
+
+focalnet_xlarge_fl4
+
+focalnet_huge_fl3
+
+focalnet_huge_fl4
+```
