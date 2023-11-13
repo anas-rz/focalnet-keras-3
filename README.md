@@ -1,4 +1,4 @@
-# A Keras Core translation of FocalNet
+# A Keras 3 translation of FocalNet
 <a target="_blank" href="https://colab.research.google.com/github/anas-rz/focalnet-keras-core/blob/main/colab_usage.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
