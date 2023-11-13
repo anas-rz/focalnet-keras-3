@@ -11,7 +11,7 @@ Released by Microsoft in 2022, FocalNet or Focal Modulation Network is an attent
 
 
 ```
-git clone https://github.com/anas-rz/focalnet-keras-core.git
+git clone https://github.com/anas-rz/focalnet-keras-3.git
 cd focalnet-keras-core
 ```
 
