@@ -3,6 +3,7 @@ import keras_core.backend as K
 from keras_core import ops
 from keras_core import initializers
 
+seed_gen = keras.random.SeedGenerator(42)
 
 class FocalModulation(keras.layers.Layer):
     def __init__(
@@ -153,7 +154,7 @@ class StochasticDepth(keras.layers.Layer):
         if training:
             keep_prob = 1 - self.drop_path_rate
             shape = (ops.shape(x)[0],) + (1,) * (len(ops.shape(x)) - 1)
-            random_tensor = keep_prob + keras.random.uniform(shape, 0, 1)
+            random_tensor = keep_prob + keras.random.uniform(shape, 0, 1, seed=seed_gen)
             random_tensor = ops.floor(random_tensor)
             return (x / keep_prob) * random_tensor
         return x
